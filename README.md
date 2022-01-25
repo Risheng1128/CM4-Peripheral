@@ -1,5 +1,7 @@
 # ARM-Cortex-M-Peripheral
 ARM Cortex-M Peripheral的基本練習
+練習開發板: NUCLEO-F3030ZE
+
 ## 參考課程
    - [Mastering Microcontroller and Embedded Driver Development](https://www.udemy.com/course/mastering-microcontroller-with-peripheral-driver-development/)
    - [Mastering Microcontroller: Timers, PWM, CAN, Low Power(MCU2)](https://www.udemy.com/course/microcontroller-programming-stm32-timers-pwm-can-bus-protocol/learn/lecture/11649572?start=15#overview)
