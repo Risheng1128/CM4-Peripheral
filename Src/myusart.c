@@ -24,10 +24,6 @@
   *   - Oversampling:    16
   **/
 
-/**
-     * 
-     */
-
 #include "myusart.h"
 
 void MYUSART_Init()
