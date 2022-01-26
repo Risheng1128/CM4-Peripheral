@@ -3,19 +3,16 @@
   * @file    stm32f303ze_usart_driver.c
   * @author  Ri-Sheng Chen
   * @brief   This file contains the functions for the USART driver.
-  *******************************************************************************/
+  ******************************************************************************
+  **/
 
 #include "stm32f303ze_usart_driver.h"
 
 /********************************************************
  * @fn              - USART_Init
- * 
  * @brief           - This function initializes the USART_Handle_t structure
- * 
  * @param[in]       - Handle structure for a USART pin
- * 
  * @return          - none
- * 
  * @note            - none
  * 
  *********************************************************/
@@ -88,31 +85,32 @@ void USART_Init(USART_Handle_t* pUSARTHandle)
 
 /********************************************************
  * @fn              - USART_Deinit
- * 
  * @brief           - This function reset the USART registers
- * 
  * @param[in]       - base address of the GPIO peripheral
- * 
  * @return          - none
- * 
  * @note            - none
  * 
  *********************************************************/
 void USART_Deinit(USART_RegDef_t* pUSARTx)
 {
-
+    if(pUSARTx == USART1)
+        USART1_REG_RST();
+    else if(pUSARTx == USART2)
+        USART2_REG_RST();
+    else if(pUSARTx == USART3)
+        USART3_REG_RST();
+    else if(pUSARTx == UART4)
+        UART4_REG_RST();
+    else if(pUSARTx == UART5)
+        UART5_REG_RST();
 }
 
 /********************************************************
  * @fn              - USART_PeriClockControl
- * 
  * @brief           - This function enables or disables the clock of the USART
- * 
  * @param[in]       - base address of the GPIO peripheral
- * @param[in]       - ENABLE or DISABLE macros
- * 
+ *                  - ENABLE or DISABLE macros
  * @return          - none
- * 
  * @note            - none
  * 
  *********************************************************/
@@ -145,13 +143,9 @@ void USART_PeriClockControl(USART_RegDef_t* pUSARTx, uint8_t EnorDi)
 
 /********************************************************
  * @fn              - USART_SetBaudRate
- * 
  * @brief           - This function set the baud rate by USART_BRR
- * 
  * @param[in]       - Handle structure for a USART pin
- * 
  * @return          - none
- * 
  * @note            - none
  * 
  *********************************************************/
@@ -170,14 +164,12 @@ void USART_SetBaudRate(USART_Handle_t* pUSARTHandle)
 
 /********************************************************
  * @fn              - USART_SendData
- * 
- * @brief           - 
- * 
- * @param[in]       - 
- * 
+ * @brief           - USART送資料 
+ * @param[in]       - Handle structure for a USART pin
+ *                  - Data Buffer
+ *                  - Data Length
  * @return          - none
- * 
- * @note            - none
+ * @note            - data width 9目前有問題
  * 
  *********************************************************/
 void USART_SendData(USART_Handle_t *pUSARTHandle, uint8_t *pTxBuffer, uint32_t Len)
@@ -194,14 +186,14 @@ void USART_SendData(USART_Handle_t *pUSARTHandle, uint8_t *pTxBuffer, uint32_t L
             /* Load data to transmit data register */
             pUSARTHandle->pUSARTx->TDR = (*pTxBuffer++ & 0xFF);
         }
-        else if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_9) {
-            pUSARTHandle->pUSARTx->TDR = (*pTxBuffer++ & 0x1FF);
+        // else if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_9) {
+        //     pUSARTHandle->pUSARTx->TDR = (*pTxBuffer++ & 0x1FF);
             
-            if(pUSARTHandle->USART_PINCFG.USART_ParityCtrl == USART_PARITY_DI) {
-                /* No parity bit means that needs to load 2 bytes data to TDR */
-                pTxBuffer++;
-            }
-        }
+        //     if(pUSARTHandle->USART_PINCFG.USART_ParityCtrl == USART_PARITY_DI) {
+        //         /* No parity bit means that needs to load 2 bytes data to TDR */
+        //         pTxBuffer++;
+        //     }
+        // }
         /* Waiting for the transmit complete (bit 6 TC) */
         while(!(pUSARTHandle->pUSARTx->ISR & 0x40));
     }
@@ -209,13 +201,9 @@ void USART_SendData(USART_Handle_t *pUSARTHandle, uint8_t *pTxBuffer, uint32_t L
 
 /********************************************************
  * @fn              - USART_ReceiveData
- * 
- * @brief           - 
- * 
- * @param[in]       - 
- * 
- * @return          - none
- * 
+ * @brief           - USART接收資料
+ * @param[in]       - Handle structure for a USART pin
+ * @return          - 接收到的資料(uint8_t)
  * @note            - none
  * 
  *********************************************************/
@@ -245,15 +233,10 @@ uint8_t USART_ReceiveData(USART_Handle_t *pUSARTHandle)
 
 /********************************************************
  * @fn              - USART_SendDataIT
- * 
  * @brief           - 
- * 
  * @param[in]       - 
- * 
  * @return          - none
- * 
  * @note            - none
- * 
  *********************************************************/
 void USART_SendDataIT(USART_Handle_t *pUSARTx, uint8_t *pTxBuffer, uint32_t Len)
 {
@@ -262,15 +245,10 @@ void USART_SendDataIT(USART_Handle_t *pUSARTx, uint8_t *pTxBuffer, uint32_t Len)
 
 /********************************************************
  * @fn              - USART_ReceiveDataIT
- * 
  * @brief           - 
- * 
  * @param[in]       - 
- * 
  * @return          - none
- * 
  * @note            - none
- * 
  *********************************************************/
 uint8_t USART_ReceiveDataIT(USART_Handle_t *pUSARTHandle, uint8_t *pRxBuffer, uint32_t Len)
 {
@@ -279,15 +257,10 @@ uint8_t USART_ReceiveDataIT(USART_Handle_t *pUSARTHandle, uint8_t *pRxBuffer, ui
 
 /********************************************************
  * @fn              - USART_IRQInterruptConfig
- * 
  * @brief           - 
- * 
  * @param[in]       - 
- * 
  * @return          - none
- * 
  * @note            - none
- * 
  *********************************************************/
 void USART_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi)
 {
@@ -296,15 +269,10 @@ void USART_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi)
 
 /********************************************************
  * @fn              - USART_IRQPriorityConfig
- * 
  * @brief           - 
- * 
  * @param[in]       - 
- * 
  * @return          - none
- * 
  * @note            - none
- * 
  *********************************************************/
 void USART_IRQPriorityConfig(uint8_t IRQNumber, uint32_t IRQPriority)
 {
@@ -313,15 +281,10 @@ void USART_IRQPriorityConfig(uint8_t IRQNumber, uint32_t IRQPriority)
 
 /********************************************************
  * @fn              - USART_IRQHandling
- * 
  * @brief           -
- * 
  * @param[in]       - 
- * 
  * @return          - none
- * 
  * @note            - none
- * 
  *********************************************************/
 void USART_IRQHandling(USART_Handle_t *pHandle)
 {

@@ -3,7 +3,8 @@
   * @file    stm32f303ze_gpio_driver.h
   * @author  Ri-Sheng Chen
   * @brief   This file contains some functions prototypes for the GPIO driver.
-  *******************************************************************************/
+  ******************************************************************************
+  **/
 
 #ifndef _STM32F303ZE_GPIO_DRIVER_H_
 #define _STM32F303ZE_GPIO_DRIVER_H_

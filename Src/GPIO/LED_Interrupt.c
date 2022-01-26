@@ -25,7 +25,7 @@ int main(void) {
 	GREEN.GPIO_PINCFG.GPIO_PinMode   = GPIO_MODE_OUTPUT;  /* Pin Mode: OUTPUT */
 	GREEN.GPIO_PINCFG.GPIO_PinOType  = GPIO_OTYPE_PP;     /* Output Type: Push-Pull */
 	GREEN.GPIO_PINCFG.GPIO_PinSpeed  = GPIO_OSPEED_LOW;   /* Speed: LOW */
-	GREEN.GPIO_PINCFG.GPIO_PinPuPdCtrl = GPIO_NO_PUPD; /* Pull-up Pull-down Control */
+	GREEN.GPIO_PINCFG.GPIO_PinPuPdCtrl = GPIO_NO_PUPD; 	  /* Pull-up Pull-down Control */
     GPIO_PeriClockControl(GREEN.pGPIOx, ENABLE);
 	GPIO_Init(&GREEN);
 

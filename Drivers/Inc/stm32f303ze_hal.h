@@ -178,7 +178,7 @@ typedef struct {
 
 /** 
  * Define basic struct of USART in the microcontroller
- * We can find it in EXTI registers in RM0316
+ * We can find it in USART registers in RM0316
  */
 typedef struct {
     __vo uint32_t CR1;           /* Control register 1                               Address offset : 0x00 */
@@ -194,6 +194,23 @@ typedef struct {
     __vo uint32_t TDR;           /* Transmit data register                           Address offset : 0x28 */
 } USART_RegDef_t;
 
+/** 
+ * Define basic struct of I2C in the microcontroller
+ * We can find it in I2C registers in RM0316
+ */
+typedef struct {
+    __vo uint32_t CR1;           /* Control register 1                               Address offset : 0x00 */                         
+    __vo uint32_t CR2;           /* Control register 2                               Address offset : 0x04 */
+    __vo uint32_t OAR1;          /* Own address 1 register                           Address offset : 0x08 */
+    __vo uint32_t OAR2;          /* Own address 2 register                           Address offset : 0x0C */
+    __vo uint32_t TIMINGR;       /* Timing register                                  Address offset : 0x10 */
+    __vo uint32_t TIMEOUTR;      /* Timeout register                                 Address offset : 0x14 */
+    __vo uint32_t ISR;           /* Interrupt and status register                    Address offset : 0x18 */
+    __vo uint32_t ICR;           /* Interrupt clear register                         Address offset : 0x1C */
+    __vo uint32_t PECR;          /* PEC register                                     Address offset : 0x20 */
+    __vo uint32_t RXDR;          /* Receive data register                            Address offset : 0x24 */
+    __vo uint32_t TXDR;          /* Transmit data register                           Address offset : 0x28 */
+} I2C_RegDef_t;
 
 /** 
  * Define basic struct of RCC in the microcontroller
@@ -252,9 +269,6 @@ typedef struct {
     __vo uint32_t* CFGR4;        /* configuration register 4                 Address offset : 0x48 */
 } SYSCFG_RegDef_t;
 
-
-
-
 /**
  * Peripheral definitions (Peripheral base addresses typecasted to xxx_RegDef_t)
  */
@@ -269,12 +283,14 @@ typedef struct {
 #define GPIOH                       ((GPIO_RegDef_t*)HAL_GPIOH_BASEADDR)
 #define RCC                         ((RCC_RegDef_t*)HAL_RCC_BASEADDR)
 #define SYSCFG                      ((SYSCFG_RegDef_t*)HAL_SYSCFG_BASEADDR)
-
 #define USART1                      ((USART_RegDef_t*)HAL_USART1_BASEADDR)
 #define USART2                      ((USART_RegDef_t*)HAL_USART2_BASEADDR)
 #define USART3                      ((USART_RegDef_t*)HAL_USART3_BASEADDR)
 #define UART4                       ((USART_RegDef_t*)HAL_UART4_BASEADDR)
 #define UART5                       ((USART_RegDef_t*)HAL_UART5_BASEADDR)
+#define I2C1                        ((I2C_RegDef_t*)HAL_I2C1_BASEADDR)
+#define I2C2                        ((I2C_RegDef_t*)HAL_I2C2_BASEADDR)
+#define I2C3                        ((I2C_RegDef_t*)HAL_I2C3_BASEADDR)
 
 /** 
  * Clock Enable macro for GPIOx peripheral
@@ -375,14 +391,30 @@ typedef struct {
 /**
  * GPIO pin register reset macros
  */
-#define GPIOA_REG_RST()             do{ RCC->AHBENR |= (1 << 17); RCC->AHBENR &= ~(1 << 17); }while(0)
-#define GPIOB_REG_RST()             do{ RCC->AHBENR |= (1 << 18); RCC->AHBENR &= ~(1 << 18); }while(0)
-#define GPIOC_REG_RST()             do{ RCC->AHBENR |= (1 << 19); RCC->AHBENR &= ~(1 << 19); }while(0)
-#define GPIOD_REG_RST()             do{ RCC->AHBENR |= (1 << 20); RCC->AHBENR &= ~(1 << 20); }while(0)
-#define GPIOE_REG_RST()             do{ RCC->AHBENR |= (1 << 21); RCC->AHBENR &= ~(1 << 21); }while(0)
-#define GPIOF_REG_RST()             do{ RCC->AHBENR |= (1 << 22); RCC->AHBENR &= ~(1 << 22); }while(0)
-#define GPIOG_REG_RST()             do{ RCC->AHBENR |= (1 << 23); RCC->AHBENR &= ~(1 << 23); }while(0)
-#define GPIOH_REG_RST()             do{ RCC->AHBENR |= (1 << 16); RCC->AHBENR &= ~(1 << 16); }while(0)
+#define GPIOA_REG_RST()             do{ RCC->AHBRSTR |= (1 << 17); RCC->AHBRSTR &= ~(1 << 17); }while(0)
+#define GPIOB_REG_RST()             do{ RCC->AHBRSTR |= (1 << 18); RCC->AHBRSTR &= ~(1 << 18); }while(0)
+#define GPIOC_REG_RST()             do{ RCC->AHBRSTR |= (1 << 19); RCC->AHBRSTR &= ~(1 << 19); }while(0)
+#define GPIOD_REG_RST()             do{ RCC->AHBRSTR |= (1 << 20); RCC->AHBRSTR &= ~(1 << 20); }while(0)
+#define GPIOE_REG_RST()             do{ RCC->AHBRSTR |= (1 << 21); RCC->AHBRSTR &= ~(1 << 21); }while(0)
+#define GPIOF_REG_RST()             do{ RCC->AHBRSTR |= (1 << 22); RCC->AHBRSTR &= ~(1 << 22); }while(0)
+#define GPIOG_REG_RST()             do{ RCC->AHBRSTR |= (1 << 23); RCC->AHBRSTR &= ~(1 << 23); }while(0)
+#define GPIOH_REG_RST()             do{ RCC->AHBRSTR |= (1 << 16); RCC->AHBRSTR &= ~(1 << 16); }while(0)
+
+/**
+ * USART pin register reset macros
+ */
+#define USART1_REG_RST()            do{ RCC->APB2RSTR |= (1 << 14); RCC->APB2RSTR &= ~(1 << 14); }while(0)
+#define USART2_REG_RST()            do{ RCC->APB1RSTR |= (1 << 17); RCC->APB2RSTR &= ~(1 << 17); }while(0)
+#define USART3_REG_RST()            do{ RCC->APB1RSTR |= (1 << 18); RCC->APB2RSTR &= ~(1 << 18); }while(0)
+#define UART4_REG_RST()             do{ RCC->APB1RSTR |= (1 << 19); RCC->APB2RSTR &= ~(1 << 19); }while(0)
+#define UART5_REG_RST()             do{ RCC->APB1RSTR |= (1 << 20); RCC->APB2RSTR &= ~(1 << 20); }while(0)
+
+/**
+ * I2C pin register reset macros
+ */
+#define I2C1_REG_RST()              do{ RCC->APB1RSTR |= (1 << 21); RCC->APB2RSTR &= ~(1 << 21); }while(0)
+#define I2C2_REG_RST()              do{ RCC->APB1RSTR |= (1 << 22); RCC->APB2RSTR &= ~(1 << 22); }while(0)
+#define I2C3_REG_RST()              do{ RCC->APB1RSTR |= (1 << 30); RCC->APB2RSTR &= ~(1 << 30); }while(0)
 
 /**
  * GPIO pin SYSCFG external interrupt configuration macros

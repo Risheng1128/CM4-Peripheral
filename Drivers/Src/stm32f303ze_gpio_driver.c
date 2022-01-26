@@ -3,19 +3,16 @@
   * @file    stm32f303ze_gpio_driver.c
   * @author  Ri-Sheng Chen
   * @brief   This file contains the functions for the GPIO driver.
-  *******************************************************************************/
+  ******************************************************************************
+  **/
 
 #include "stm32f303ze_gpio_driver.h"
 
 /********************************************************
  * @fn              - GPIO_Init
- * 
  * @brief           - This function initializes the GPIO_Handle_t structure
- * 
  * @param[in]       - Handle structure for a GPIO pin
- * 
  * @return          - none
- * 
  * @note            - none
  * 
  *********************************************************/
@@ -74,13 +71,9 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 
 /********************************************************
  * @fn              - GPIO_DeInit
- * 
  * @brief           - This function reset the GPIO registers
- * 
  * @param[in]       - base address of the GPIO peripheral
- * 
  * @return          - none
- * 
  * @note            - none
  * 
  *********************************************************/
@@ -106,14 +99,10 @@ void GPIO_DeInit(GPIO_RegDef_t *pGPIOx)
 
 /********************************************************
  * @fn              - GPIO_PeriClockControl
- * 
  * @brief           - This function enables or disables the clock of the GPIO
- * 
  * @param[in]       - base address of the GPIO peripheral
- * @param[in]       - ENABLE or DISABLE macros
- * 
+ *                  - ENABLE or DISABLE macros
  * @return          - none
- * 
  * @note            - none
  * 
  *********************************************************/
@@ -158,14 +147,10 @@ void GPIO_PeriClockControl(GPIO_RegDef_t* pGPIOx, uint8_t EnorDi)
 
 /********************************************************
  * @fn              - GPIO_ReadFromInputPin
- * 
  * @brief           - This function reads the value of a Pin
- * 
  * @param[in]       - base address of the GPIO peripheral
- * @param[in]       - The pin number that wants to read (0 ~ 15)
- * 
+ *                  - The pin number that wants to read (0 ~ 15)
  * @return          - 0 or 1
- * 
  * @note            - none
  * 
  *********************************************************/
@@ -176,13 +161,9 @@ uint8_t GPIO_ReadFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber)
 
 /********************************************************
  * @fn              - GPIO_ReadFromInputPort
- * 
  * @brief           - This function reads the value of a Port
- * 
  * @param[in]       - base address of the GPIO peripheral
- * 
  * @return          - a uint16_t number
- * 
  * @note            - none
  * 
  *********************************************************/
@@ -193,15 +174,11 @@ uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t *pGPIOx)
 
 /********************************************************
  * @fn              - GPIO_WriteToOutputPin
- * 
  * @brief           - This function writes a value to a GPIO pin
- * 
  * @param[in]       - base address of the GPIO peripheral
- * @param[in]       - The pin number that wants to write (0 ~ 15)
- * @param[in]       - ENABLE or DISABLE macros
- * 
+ *                  - The pin number that wants to write (0 ~ 15)
+ *                  - ENABLE or DISABLE macros
  * @return          - none
- * 
  * @note            - none
  * 
  *********************************************************/
@@ -218,14 +195,10 @@ void GPIO_WriteToOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t Eno
 
 /********************************************************
  * @fn              - GPIO_WriteToOutputPort
- * 
  * @brief           - This function writes a value to a GPIO port
- * 
  * @param[in]       - base address of the GPIO peripheral
- * @param[in]       - The value that wants to write to the port
- * 
+ *                  - The value that wants to write to the port
  * @return          - none
- * 
  * @note            - none
  * 
  *********************************************************/
@@ -236,14 +209,10 @@ void GPIO_WriteToOutputPort(GPIO_RegDef_t *pGPIOx, uint16_t value)
 
 /********************************************************
  * @fn              - GPIO_ToggleOutputPin
- * 
  * @brief           - This function initialize the GPIO_Handle_t structure
- * 
  * @param[in]       - base address of the GPIO peripheral
- * @param[in]       - The pin number that wans to toggle
- * 
+ *                  - The pin number that wans to toggle
  * @return          - none
- * 
  * @note            - none
  * 
  *********************************************************/
@@ -254,14 +223,10 @@ void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber)
 
 /********************************************************
  * @fn              - GPIO_IRQInterruptConfig
- * 
  * @brief           - This function enable or disable the interrupt of given IQR number interrupt 
- * 
  * @param[in]       - IRQNumber
- * @param[in]       - ENABLE or DISABLE macros
- * 
+ *                  - ENABLE or DISABLE macros
  * @return          - none
- * 
  * @note            - none
  * 
  *********************************************************/
@@ -286,14 +251,10 @@ void GPIO_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi)
 
 /********************************************************
  * @fn              - GPIO_IRQPriorityConfig
- * 
  * @brief           - This function configure the priority of given IQR number interrupt 
- * 
  * @param[in]       - IRQNumber
- * @param[in]       - IRQpriority
- * 
+ *                  - IRQpriority
  * @return          - none
- * 
  * @note            - none
  * 
  *********************************************************/
@@ -309,13 +270,9 @@ void GPIO_IRQPriorityConfig(uint8_t IRQNumber, uint32_t IRQpriority)
 
 /********************************************************
  * @fn              - GPIO_IRQHandling
- * 
  * @brief           - Interrupt Handling function
- * 
  * @param[in]       - pin number
- * 
  * @return          - none
- * 
  * @note            - none
  * 
  *********************************************************/
