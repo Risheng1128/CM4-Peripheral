@@ -12,7 +12,8 @@
 
 #include "stm32f303ze_gpio_driver.h"
 
-int main(void){
+int main(void)
+{
     GPIO_Handle_t GREEN, Button;
 	/* GREEN SET */
 	GREEN.pGPIOx = GPIOB;								  /* PORTB */
@@ -33,10 +34,13 @@ int main(void){
 	GPIO_Init(&GREEN);
     GPIO_PeriClockControl(Button.pGPIOx, ENABLE);
 	GPIO_Init(&Button);
-    while(1) {
-        if(GPIO_ReadFromInputPin(Button.pGPIOx, Button.GPIO_PINCFG.GPIO_PinNumber)) {
+    while(1) 
+    {
+        if(GPIO_ReadFromInputPin(Button.pGPIOx, Button.GPIO_PINCFG.GPIO_PinNumber))
+        {
             for(int i = 0; i < 250000; i++); /* Delay */
             GPIO_ToggleOutputPin(GREEN.pGPIOx, GREEN.GPIO_PINCFG.GPIO_PinNumber);
         }
     }
+    return 0;
 }

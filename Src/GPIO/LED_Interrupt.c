@@ -14,7 +14,8 @@
 #include "stm32f303ze_gpio_driver.h"
 #include <string.h>
 
-int main(void) {
+int main(void) 
+{
 	GPIO_Handle_t GREEN, Button;
 	memset(&GREEN, 0, sizeof(GPIO_Handle_t));
 	memset(&Button, 0, sizeof(GPIO_Handle_t));
@@ -44,7 +45,8 @@ int main(void) {
 	return 0;
 }
 
-void EXTI15_10_IRQHandler(void) {
+void EXTI15_10_IRQHandler(void) 
+{
 	for(int i = 0; i < 80000; i++);
 	GPIO_ToggleOutputPin(GPIOB, GPIO_PIN_NO_0);
 	for(int i = 0; i < 80000; i++); /* Delay */
