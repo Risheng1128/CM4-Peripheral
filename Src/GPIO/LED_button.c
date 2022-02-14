@@ -34,10 +34,8 @@ int main(void)
 	GPIO_Init(&GREEN);
     GPIO_PeriClockControl(Button.pGPIOx, ENABLE);
 	GPIO_Init(&Button);
-    while(1) 
-    {
-        if(GPIO_ReadFromInputPin(Button.pGPIOx, Button.GPIO_PINCFG.GPIO_PinNumber))
-        {
+    while(1) {
+        if(GPIO_ReadFromInputPin(Button.pGPIOx, Button.GPIO_PINCFG.GPIO_PinNumber)) {
             for(int i = 0; i < 250000; i++); /* Delay */
             GPIO_ToggleOutputPin(GREEN.pGPIOx, GREEN.GPIO_PINCFG.GPIO_PinNumber);
         }

@@ -43,8 +43,7 @@ int main(void)
 	GPIO_Init(&GREEN);
 	GPIO_PeriClockControl(BLUE.pGPIOx, ENABLE);
 	GPIO_Init(&BLUE);
-	while (1) 
-	{
+	while (1) {
 		GPIO_ToggleOutputPin(RED.pGPIOx, RED.GPIO_PINCFG.GPIO_PinNumber);     /* Red Open    */
 		for(int i = 0; i < 100000; i++);
 		GPIO_ToggleOutputPin(RED.pGPIOx, RED.GPIO_PINCFG.GPIO_PinNumber);     /* Red Close   */

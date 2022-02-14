@@ -27,18 +27,15 @@ void USART_Init(USART_Handle_t* pUSARTHandle)
      * USART mode set 
      * Bit 2 RE & Bit 3 TE (CR1)
      */
-    if(pUSARTHandle->USART_PINCFG.USART_Mode == USART_MODE_RX) 
-    {
+    if(pUSARTHandle->USART_PINCFG.USART_Mode == USART_MODE_RX) {
         pUSARTHandle->pUSARTx->CR1 &= ~(1 << 3);            /* Disable Tx */
         pUSARTHandle->pUSARTx->CR1 |=   1 << 2;             /* Enable Rx */
     }
-    else if(pUSARTHandle->USART_PINCFG.USART_Mode == USART_MODE_TX) 
-    {
+    else if(pUSARTHandle->USART_PINCFG.USART_Mode == USART_MODE_TX) {
         pUSARTHandle->pUSARTx->CR1 &= ~(1 << 2);            /* Disable Rx */
         pUSARTHandle->pUSARTx->CR1 |=   1 << 3;             /* Enable Tx */
     }
-    else if(pUSARTHandle->USART_PINCFG.USART_Mode == USART_MODE_TXRX) 
-    {
+    else if(pUSARTHandle->USART_PINCFG.USART_Mode == USART_MODE_TXRX) {
         pUSARTHandle->pUSARTx->CR1 |= (1 << 2) | (1 << 3);  /* Enable Tx/Rx */
     }
 
@@ -46,19 +43,16 @@ void USART_Init(USART_Handle_t* pUSARTHandle)
      * USART word length set
      * Bit 12 M0 & Bit 28 M1 (CR1)
      */
-    if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_7) 
-    {
+    if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_7) {
         /* 1 Start bit, 7 data bits, n stop bits */
         pUSARTHandle->pUSARTx->CR1 &= ~(1 << 12);
         pUSARTHandle->pUSARTx->CR1 |=  (1 << 28);
     }
-    else if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_8) 
-    {
+    else if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_8) {
         /* 1 Start bit, 8 data bits, n stop bits */
         pUSARTHandle->pUSARTx->CR1 &= ~(1 << 12) & ~(1 << 28); 
     }
-    else if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_9)
-    {
+    else if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_9) {
         /* 1 Start bit, 9 data bits, n stop bits */
         pUSARTHandle->pUSARTx->CR1 |=  (1 << 12);
         pUSARTHandle->pUSARTx->CR1 &= ~(1 << 28);
@@ -122,8 +116,7 @@ void USART_Deinit(USART_RegDef_t* pUSARTx)
  *********************************************************/
 void USART_PeriClockControl(USART_RegDef_t* pUSARTx, uint8_t EnorDi)
 {
-    if(EnorDi == ENABLE) 
-    {
+    if(EnorDi == ENABLE) {
         if(pUSARTx == USART1)
             USART1_PCLK_EN();
         else if(pUSARTx == USART2)
@@ -134,9 +127,7 @@ void USART_PeriClockControl(USART_RegDef_t* pUSARTx, uint8_t EnorDi)
             UART4_PCLK_EN();
         else if(pUSARTx == UART5)
             UART5_PCLK_EN();
-    } 
-    else 
-    {
+    } else {
         if(pUSARTx == USART1)
             USART1_PCLK_DI();
         else if(pUSARTx == USART2)
@@ -161,12 +152,9 @@ void USART_PeriClockControl(USART_RegDef_t* pUSARTx, uint8_t EnorDi)
 void USART_SetBaudRate(USART_Handle_t* pUSARTHandle)
 {
     /* OVER8 in USART_CR1 bit 15 */
-    if(!(pUSARTHandle->pUSARTx->CR1 & 0x8000)) /* oversampling by 16 */ 
-    {    
+    if(!(pUSARTHandle->pUSARTx->CR1 & 0x8000)) { /* oversampling by 16 */ 
         pUSARTHandle->pUSARTx->BRR = F_CLK / pUSARTHandle->USART_PINCFG.USART_Baud;
-    } 
-    else /* oversampling by 16 */
-    {    
+    } else { /* oversampling by 16 */
         uint32_t USARTDIV = 2 * F_CLK / pUSARTHandle->USART_PINCFG.USART_Baud;
         uint8_t tmp1 = (USARTDIV & 0xF) >> 1;   /* BRR[2:0]  */
         uint16_t tmp2 = (USARTDIV & 0xFFF0);    /* BRR[15:3] */
@@ -186,18 +174,15 @@ void USART_SetBaudRate(USART_Handle_t* pUSARTHandle)
  *********************************************************/
 void USART_SendData(USART_Handle_t *pUSARTHandle, uint8_t *pTxBuffer, uint32_t Len)
 {
-    for(int i = 0; i < Len; i++) 
-    {
+    for(int i = 0; i < Len; i++) {
         /* Waiting for the transmit data register empty (bit 7 TXE) */
         while(!(pUSARTHandle->pUSARTx->ISR & 0x80));
         
-        if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_7) 
-        {
+        if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_7) {
             /* Load data to transmit data register */
             pUSARTHandle->pUSARTx->TDR = (*pTxBuffer++ & 0x7F);
         }
-        else if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_8) 
-        {
+        else if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_8) {
             /* Load data to transmit data register */
             pUSARTHandle->pUSARTx->TDR = (*pTxBuffer++ & 0xFF);
         }
@@ -229,14 +214,12 @@ uint8_t USART_ReceiveData(USART_Handle_t *pUSARTHandle)
     /* Waiting for the transmit data transmit to USART_RDR register (USART_ISR bit 5 RXNE) */
     while(!(pUSARTHandle->pUSARTx->ISR & 0x20));
 
-    if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_7) 
-    {
+    if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_7) {
         if(pUSARTHandle->USART_PINCFG.USART_ParityCtrl == USART_PARITY_DI)
             data = pUSARTHandle->pUSARTx->RDR;
         //else data = pUSARTHandle->pUSARTx->RDR;
     }
-    else if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_8) 
-    {
+    else if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_8) {
         data = pUSARTHandle->pUSARTx->RDR;
     }
     // else if(pUSARTHandle->USART_PINCFG.USART_WordLength == USART_WORDLEN_9) {
