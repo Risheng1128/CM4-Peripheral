@@ -1,5 +1,5 @@
 # CM4 Peripheral
-ARM Cortex-M4 P Peripheral的基本練習
+ARM Cortex-M4 Peripheral的基本練習
 
 練習開發板: NUCLEO-F3030ZE
 
@@ -22,7 +22,7 @@ ARM Cortex-M4 P Peripheral的基本練習
    - USART: Interrupt
    - I2C: all
    - SPI: all
-   - Timer: all PWM
+   - Timer: all
    - RTC: all
    - CAN: all
    - DMA: all
