@@ -1,7 +1,7 @@
 # CM4 Peripheral
 ARM Cortex-M4 Peripheral的基本練習
 
-練習開發板: NUCLEO-F3030ZE
+練習開發板: NUCLEO-F303ZE
 
 ## 參考課程
    - [Mastering Microcontroller and Embedded Driver Development](https://www.udemy.com/course/mastering-microcontroller-with-peripheral-driver-development/)
@@ -11,11 +11,11 @@ ARM Cortex-M4 Peripheral的基本練習
 ## 目標:
    - 理解每個外部設備的功能及運作原理
    
-   - 練習實作每個外部設備的Hardware Abstraction Layer(HAL)
+   - 練習實作每個外部設備的 Hardware Abstraction Layer(HAL)
 
 ## 目前完成
    - GPIO
-   
+
    - USART (一小部分) 
 
 ## To Do List
@@ -28,5 +28,3 @@ ARM Cortex-M4 Peripheral的基本練習
    - DMA: all
    - ADC: all
    - DAC: all
-
-  
