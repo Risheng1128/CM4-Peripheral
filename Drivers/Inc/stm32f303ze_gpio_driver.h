@@ -120,7 +120,7 @@ void GPIO_DeInit(GPIO_RegDef_t *pGPIOx);
 /**
  * Peripheral Clock setup
  */
-void GPIO_PeriClockControl(GPIO_RegDef_t* pGPIOx, uint8_t EnorDi);
+void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t EnorDi);
 
 /**
  * Data read and write

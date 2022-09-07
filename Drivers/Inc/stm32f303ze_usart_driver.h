@@ -89,7 +89,7 @@ typedef struct {
  * @USART_HWFlowControl
  * The options for USART_HWFlowControl (configure from CTSE & RTSE in CR3)
  */
-#define USART_HW_FLOWCTRL_NONE    	    0       /* Use neither CTS nor RTS */
+#define USART_HW_FLOWCTRL_NONE    	  0       /* Use neither CTS nor RTS */
 #define USART_HW_FLOWCTRL_RTS    	    1       /* Only use CTS */
 #define USART_HW_FLOWCTRL_CTS    	    2       /* Only use RTS */
 #define USART_HW_FLOWCTRL_CRTS  	    3       /* Use both CTS and RTS */
@@ -126,18 +126,18 @@ typedef struct {
 /**
  * Init and De-init
  */
-void USART_Init(USART_Handle_t* pUSARTHandle);
-void USART_Deinit(USART_RegDef_t* pUSARTx);
+void USART_Init(USART_Handle_t *pUSARTHandle);
+void USART_Deinit(USART_RegDef_t *pUSARTx);
 
 /**
  * Peripheral Clock setup
  */
-void USART_PeriClockControl(USART_RegDef_t* pUSARTx, uint8_t EnorDi);
+void USART_PeriClockControl(USART_RegDef_t *pUSARTx, uint8_t EnorDi);
 
 /**
  * USART baud rate setup
  */
-void USART_SetBaudRate(USART_Handle_t* pUSARTx);
+void USART_SetBaudRate(USART_Handle_t *pUSARTx);
 
 /**
  * Data read and write
@@ -164,6 +164,6 @@ void USART_ClearFlag(USART_RegDef_t *pUSARTx, uint16_t StatusFlagName);
 /*
  * Application callback
  */
-void USART_ApplicationEventCallback(USART_Handle_t *pUSARTHandle,uint8_t AppEv);
+void USART_ApplicationEventCallback(USART_Handle_t *pUSARTHandle, uint8_t AppEv);
 
 #endif /* End of _STM32F303ZE_USART_DRIVER_H_ */

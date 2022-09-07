@@ -26,25 +26,25 @@
  * ARM Cortex M processor NVIC ISER Register
  * We can find it in Nested Vectored Interrupt Controller in Generic User Guide
  */
-#define NVIC_ISER0                  ((__vo uint32_t*)0xE000E100U)  
-#define NVIC_ISER1                  ((__vo uint32_t*)0xE000E104U) 
-#define NVIC_ISER2                  ((__vo uint32_t*)0xE000E108U) 
-#define NVIC_ISER3                  ((__vo uint32_t*)0xE000E10CU)
+#define NVIC_ISER0                  ((__vo uint32_t *)0xE000E100U)  
+#define NVIC_ISER1                  ((__vo uint32_t *)0xE000E104U) 
+#define NVIC_ISER2                  ((__vo uint32_t *)0xE000E108U) 
+#define NVIC_ISER3                  ((__vo uint32_t *)0xE000E10CU)
 
 /**
  * ARM Cortex M processor NVIC ICER Register
  * We can find it in Nested Vectored Interrupt Controller in Generic User Guide
  */
-#define NVIC_ICER0                  ((__vo uint32_t*)0xE000E180U)  
-#define NVIC_ICER1                  ((__vo uint32_t*)0xE000E184U) 
-#define NVIC_ICER2                  ((__vo uint32_t*)0xE000E188U)
-#define NVIC_ICER3                  ((__vo uint32_t*)0xE000E18CU)
+#define NVIC_ICER0                  ((__vo uint32_t *)0xE000E180U)  
+#define NVIC_ICER1                  ((__vo uint32_t *)0xE000E184U) 
+#define NVIC_ICER2                  ((__vo uint32_t *)0xE000E188U)
+#define NVIC_ICER3                  ((__vo uint32_t *)0xE000E18CU)
 
 /**
  * ARM Cortex M processor NVIC Priority Register base address macro
  * We can find it in Nested Vectored Interrupt Controller in Generic User Guide
  */
-#define NVIC_PR_BASE_ADDR           ((__vo uint32_t*)0xE000E400U)
+#define NVIC_PR_BASE_ADDR           ((__vo uint32_t *)0xE000E400U)
 
 /* In priority register, 16 programmable priority levels (4 bits of interrupt priority are used) */
 /* From RM0316 Reference manual p285 */
@@ -266,121 +266,121 @@ typedef struct {
         EXTICR[3]: external interrupt configuration register 4               Address offset : 0x14 */
     __vo uint32_t EXTICR[4];      
     __vo uint32_t CFGR2;         /* configuration register 2                 Address offset : 0x18 */
-    __vo uint32_t* CFGR4;        /* configuration register 4                 Address offset : 0x48 */
+    __vo uint32_t *CFGR4;        /* configuration register 4                 Address offset : 0x48 */
 } SYSCFG_RegDef_t;
 
 /**
  * Peripheral definitions (Peripheral base addresses typecasted to xxx_RegDef_t)
  */
-#define EXTI                        ((EXTI_RegDef_t*)HAL_EXTI_BASEADDR)
-#define GPIOA                       ((GPIO_RegDef_t*)HAL_GPIOA_BASEADDR)
-#define GPIOB                       ((GPIO_RegDef_t*)HAL_GPIOB_BASEADDR)
-#define GPIOC                       ((GPIO_RegDef_t*)HAL_GPIOC_BASEADDR)
-#define GPIOD                       ((GPIO_RegDef_t*)HAL_GPIOD_BASEADDR)
-#define GPIOE                       ((GPIO_RegDef_t*)HAL_GPIOE_BASEADDR)
-#define GPIOF                       ((GPIO_RegDef_t*)HAL_GPIOF_BASEADDR)
-#define GPIOG                       ((GPIO_RegDef_t*)HAL_GPIOG_BASEADDR)
-#define GPIOH                       ((GPIO_RegDef_t*)HAL_GPIOH_BASEADDR)
-#define RCC                         ((RCC_RegDef_t*)HAL_RCC_BASEADDR)
-#define SYSCFG                      ((SYSCFG_RegDef_t*)HAL_SYSCFG_BASEADDR)
-#define USART1                      ((USART_RegDef_t*)HAL_USART1_BASEADDR)
-#define USART2                      ((USART_RegDef_t*)HAL_USART2_BASEADDR)
-#define USART3                      ((USART_RegDef_t*)HAL_USART3_BASEADDR)
-#define UART4                       ((USART_RegDef_t*)HAL_UART4_BASEADDR)
-#define UART5                       ((USART_RegDef_t*)HAL_UART5_BASEADDR)
-#define I2C1                        ((I2C_RegDef_t*)HAL_I2C1_BASEADDR)
-#define I2C2                        ((I2C_RegDef_t*)HAL_I2C2_BASEADDR)
-#define I2C3                        ((I2C_RegDef_t*)HAL_I2C3_BASEADDR)
+#define EXTI                        ((EXTI_RegDef_t *)HAL_EXTI_BASEADDR)
+#define GPIOA                       ((GPIO_RegDef_t *)HAL_GPIOA_BASEADDR)
+#define GPIOB                       ((GPIO_RegDef_t *)HAL_GPIOB_BASEADDR)
+#define GPIOC                       ((GPIO_RegDef_t *)HAL_GPIOC_BASEADDR)
+#define GPIOD                       ((GPIO_RegDef_t *)HAL_GPIOD_BASEADDR)
+#define GPIOE                       ((GPIO_RegDef_t *)HAL_GPIOE_BASEADDR)
+#define GPIOF                       ((GPIO_RegDef_t *)HAL_GPIOF_BASEADDR)
+#define GPIOG                       ((GPIO_RegDef_t *)HAL_GPIOG_BASEADDR)
+#define GPIOH                       ((GPIO_RegDef_t *)HAL_GPIOH_BASEADDR)
+#define RCC                         ((RCC_RegDef_t * )HAL_RCC_BASEADDR)
+#define SYSCFG                      ((SYSCFG_RegDef_t *)HAL_SYSCFG_BASEADDR)
+#define USART1                      ((USART_RegDef_t *)HAL_USART1_BASEADDR)
+#define USART2                      ((USART_RegDef_t *)HAL_USART2_BASEADDR)
+#define USART3                      ((USART_RegDef_t *)HAL_USART3_BASEADDR)
+#define UART4                       ((USART_RegDef_t *)HAL_UART4_BASEADDR)
+#define UART5                       ((USART_RegDef_t *)HAL_UART5_BASEADDR)
+#define I2C1                        ((I2C_RegDef_t *)HAL_I2C1_BASEADDR)
+#define I2C2                        ((I2C_RegDef_t *)HAL_I2C2_BASEADDR)
+#define I2C3                        ((I2C_RegDef_t *)HAL_I2C3_BASEADDR)
 
 /** 
  * Clock Enable macro for GPIOx peripheral
  * We can find it in AHB peripheral clock enable register in RM0316
  */
-#define GPIOA_PCLK_EN()             RCC->AHBENR |= (1 << 17)
-#define GPIOB_PCLK_EN()             RCC->AHBENR |= (1 << 18)
-#define GPIOC_PCLK_EN()             RCC->AHBENR |= (1 << 19)
-#define GPIOD_PCLK_EN()             RCC->AHBENR |= (1 << 20)
-#define GPIOE_PCLK_EN()             RCC->AHBENR |= (1 << 21)
-#define GPIOF_PCLK_EN()             RCC->AHBENR |= (1 << 22)
-#define GPIOG_PCLK_EN()             RCC->AHBENR |= (1 << 23)
-#define GPIOH_PCLK_EN()             RCC->AHBENR |= (1 << 16)
+#define GPIOA_PCLK_EN()             (RCC->AHBENR |= (1 << 17))
+#define GPIOB_PCLK_EN()             (RCC->AHBENR |= (1 << 18))
+#define GPIOC_PCLK_EN()             (RCC->AHBENR |= (1 << 19))
+#define GPIOD_PCLK_EN()             (RCC->AHBENR |= (1 << 20))
+#define GPIOE_PCLK_EN()             (RCC->AHBENR |= (1 << 21))
+#define GPIOF_PCLK_EN()             (RCC->AHBENR |= (1 << 22))
+#define GPIOG_PCLK_EN()             (RCC->AHBENR |= (1 << 23))
+#define GPIOH_PCLK_EN()             (RCC->AHBENR |= (1 << 16))
 
 /** 
  * Clock Enable macro for I2Cx peripheral
  * We can find it in APB1 peripheral clock enable register in RM0316
  */
-#define I2C1_PCLK_EN()              RCC->APB1ENR |= (1 << 21)
-#define I2C2_PCLK_EN()              RCC->APB1ENR |= (1 << 22)
-#define I2C3_PCLK_EN()              RCC->APB1ENR |= (1 << 30)
+#define I2C1_PCLK_EN()              (RCC->APB1ENR |= (1 << 21))
+#define I2C2_PCLK_EN()              (RCC->APB1ENR |= (1 << 22))
+#define I2C3_PCLK_EN()              (RCC->APB1ENR |= (1 << 30))
 
 /** 
  * Clock Enable macro for SPIx peripheral
  * SPI14: APB2 peripheral clock enable register in RM0316
  * SPI23: APB1 peripheral clock enable register in RM0316
  */
-#define SPI1_PCLK_EN()              RCC->APB2ENR |= (1 << 12)
-#define SPI2_PCLK_EN()              RCC->APB1ENR |= (1 << 14)
-#define SPI3_PCLK_EN()              RCC->APB1ENR |= (1 << 15)
-#define SPI4_PCLK_EN()              RCC->APB2ENR |= (1 << 15)
+#define SPI1_PCLK_EN()              (RCC->APB2ENR |= (1 << 12))
+#define SPI2_PCLK_EN()              (RCC->APB1ENR |= (1 << 14))
+#define SPI3_PCLK_EN()              (RCC->APB1ENR |= (1 << 15))
+#define SPI4_PCLK_EN()              (RCC->APB2ENR |= (1 << 15))
 
 /** 
  * Clock Enable macro for USARTx peripheral
  * USART1: APB2 peripheral clock enable register in RM0316
  * USART23 & UART45: APB1 peripheral clock enable register in RM0316
  */
-#define USART1_PCLK_EN()            RCC->APB2ENR |= (1 << 14)
-#define USART2_PCLK_EN()            RCC->APB1ENR |= (1 << 17)
-#define USART3_PCLK_EN()            RCC->APB1ENR |= (1 << 18)
-#define UART4_PCLK_EN()             RCC->APB1ENR |= (1 << 19)
-#define UART5_PCLK_EN()             RCC->APB1ENR |= (1 << 20)
+#define USART1_PCLK_EN()            (RCC->APB2ENR |= (1 << 14))
+#define USART2_PCLK_EN()            (RCC->APB1ENR |= (1 << 17))
+#define USART3_PCLK_EN()            (RCC->APB1ENR |= (1 << 18))
+#define UART4_PCLK_EN()             (RCC->APB1ENR |= (1 << 19))
+#define UART5_PCLK_EN()             (RCC->APB1ENR |= (1 << 20))
 
 /** 
  * Clock Enable macro for SYSCFG peripheral
  * We can find it in APB2 peripheral clock enable register in RM0316
  */
-#define SYSCFG_PCLK_EN()            RCC->APB2ENR |= (1 << 0)
+#define SYSCFG_PCLK_EN()            (RCC->APB2ENR |= (1 << 0))
 
 /** 
  * Clock Disable macro for GPIOx peripheral
  * We can find it in AHB peripheral clock disable register in RM0316
  */
-#define GPIOA_PCLK_DI()             RCC->AHBENR &= ~(1 << 17)
-#define GPIOB_PCLK_DI()             RCC->AHBENR &= ~(1 << 18)
-#define GPIOC_PCLK_DI()             RCC->AHBENR &= ~(1 << 19)
-#define GPIOD_PCLK_DI()             RCC->AHBENR &= ~(1 << 20)
-#define GPIOE_PCLK_DI()             RCC->AHBENR &= ~(1 << 21)
-#define GPIOF_PCLK_DI()             RCC->AHBENR &= ~(1 << 22)
-#define GPIOG_PCLK_DI()             RCC->AHBENR &= ~(1 << 23)
-#define GPIOH_PCLK_DI()             RCC->AHBENR &= ~(1 << 16)
+#define GPIOA_PCLK_DI()             (RCC->AHBENR &= ~(1 << 17))
+#define GPIOB_PCLK_DI()             (RCC->AHBENR &= ~(1 << 18))
+#define GPIOC_PCLK_DI()             (RCC->AHBENR &= ~(1 << 19))
+#define GPIOD_PCLK_DI()             (RCC->AHBENR &= ~(1 << 20))
+#define GPIOE_PCLK_DI()             (RCC->AHBENR &= ~(1 << 21))
+#define GPIOF_PCLK_DI()             (RCC->AHBENR &= ~(1 << 22))
+#define GPIOG_PCLK_DI()             (RCC->AHBENR &= ~(1 << 23))
+#define GPIOH_PCLK_DI()             (RCC->AHBENR &= ~(1 << 16))
 
 /** 
  * Clock Disable macro for I2Cx peripheral
  * We can find it in APB1 peripheral clock disable register in RM0316
  */
-#define I2C1_PCLK_DI()              RCC->APB1ENR &= ~(1 << 21)
-#define I2C2_PCLK_DI()              RCC->APB1ENR &= ~(1 << 22)
-#define I2C3_PCLK_DI()              RCC->APB1ENR &= ~(1 << 30)
+#define I2C1_PCLK_DI()              (RCC->APB1ENR &= ~(1 << 21))
+#define I2C2_PCLK_DI()              (RCC->APB1ENR &= ~(1 << 22))
+#define I2C3_PCLK_DI()              (RCC->APB1ENR &= ~(1 << 30))
 
 /** 
  * Clock Disable macro for SPIx peripheral
  * SPI14: APB2 peripheral clock disable register in RM0316
  * SPI23: APB1 peripheral clock disable register in RM0316
  */
-#define SPI1_PCLK_DI()              RCC->APB2ENR &= ~(1 << 12)
-#define SPI2_PCLK_DI()              RCC->APB1ENR &= ~(1 << 14)
-#define SPI3_PCLK_DI()              RCC->APB1ENR &= ~(1 << 15)
-#define SPI4_PCLK_DI()              RCC->APB2ENR &= ~(1 << 15)
+#define SPI1_PCLK_DI()              (RCC->APB2ENR &= ~(1 << 12))
+#define SPI2_PCLK_DI()              (RCC->APB1ENR &= ~(1 << 14))
+#define SPI3_PCLK_DI()              (RCC->APB1ENR &= ~(1 << 15))
+#define SPI4_PCLK_DI()              (RCC->APB2ENR &= ~(1 << 15))
 
 /** 
  * Clock Disable macro for USARTx peripheral
  * USART1: APB2 peripheral clock disable register in RM0316
  * USART23 & UART45: APB1 peripheral clock disable register in RM0316
  */
-#define USART1_PCLK_DI()            RCC->APB2ENR &= ~(1 << 14)
-#define USART2_PCLK_DI()            RCC->APB1ENR &= ~(1 << 17)
-#define USART3_PCLK_DI()            RCC->APB1ENR &= ~(1 << 18)
-#define UART4_PCLK_DI()             RCC->APB1ENR &= ~(1 << 19)
-#define UART5_PCLK_DI()             RCC->APB1ENR &= ~(1 << 20)
+#define USART1_PCLK_DI()            (RCC->APB2ENR &= ~(1 << 14))
+#define USART2_PCLK_DI()            (RCC->APB1ENR &= ~(1 << 17))
+#define USART3_PCLK_DI()            (RCC->APB1ENR &= ~(1 << 18))
+#define UART4_PCLK_DI()             (RCC->APB1ENR &= ~(1 << 19))
+#define UART5_PCLK_DI()             (RCC->APB1ENR &= ~(1 << 20))
 
 /** 
  * Clock Disable macro for SYSCFG peripheral
@@ -391,23 +391,23 @@ typedef struct {
 /**
  * GPIO pin register reset macros
  */
-#define GPIOA_REG_RST()             do{ RCC->AHBRSTR |= (1 << 17); RCC->AHBRSTR &= ~(1 << 17); }while(0)
-#define GPIOB_REG_RST()             do{ RCC->AHBRSTR |= (1 << 18); RCC->AHBRSTR &= ~(1 << 18); }while(0)
-#define GPIOC_REG_RST()             do{ RCC->AHBRSTR |= (1 << 19); RCC->AHBRSTR &= ~(1 << 19); }while(0)
-#define GPIOD_REG_RST()             do{ RCC->AHBRSTR |= (1 << 20); RCC->AHBRSTR &= ~(1 << 20); }while(0)
-#define GPIOE_REG_RST()             do{ RCC->AHBRSTR |= (1 << 21); RCC->AHBRSTR &= ~(1 << 21); }while(0)
-#define GPIOF_REG_RST()             do{ RCC->AHBRSTR |= (1 << 22); RCC->AHBRSTR &= ~(1 << 22); }while(0)
-#define GPIOG_REG_RST()             do{ RCC->AHBRSTR |= (1 << 23); RCC->AHBRSTR &= ~(1 << 23); }while(0)
-#define GPIOH_REG_RST()             do{ RCC->AHBRSTR |= (1 << 16); RCC->AHBRSTR &= ~(1 << 16); }while(0)
+#define GPIOA_REG_RST()             do{ RCC->AHBRSTR |= (1 << 17); RCC->AHBRSTR &= ~(1 << 17); } while(0)
+#define GPIOB_REG_RST()             do{ RCC->AHBRSTR |= (1 << 18); RCC->AHBRSTR &= ~(1 << 18); } while(0)
+#define GPIOC_REG_RST()             do{ RCC->AHBRSTR |= (1 << 19); RCC->AHBRSTR &= ~(1 << 19); } while(0)
+#define GPIOD_REG_RST()             do{ RCC->AHBRSTR |= (1 << 20); RCC->AHBRSTR &= ~(1 << 20); } while(0)
+#define GPIOE_REG_RST()             do{ RCC->AHBRSTR |= (1 << 21); RCC->AHBRSTR &= ~(1 << 21); } while(0)
+#define GPIOF_REG_RST()             do{ RCC->AHBRSTR |= (1 << 22); RCC->AHBRSTR &= ~(1 << 22); } while(0)
+#define GPIOG_REG_RST()             do{ RCC->AHBRSTR |= (1 << 23); RCC->AHBRSTR &= ~(1 << 23); } while(0)
+#define GPIOH_REG_RST()             do{ RCC->AHBRSTR |= (1 << 16); RCC->AHBRSTR &= ~(1 << 16); } while(0)
 
 /**
  * USART pin register reset macros
  */
-#define USART1_REG_RST()            do{ RCC->APB2RSTR |= (1 << 14); RCC->APB2RSTR &= ~(1 << 14); }while(0)
-#define USART2_REG_RST()            do{ RCC->APB1RSTR |= (1 << 17); RCC->APB2RSTR &= ~(1 << 17); }while(0)
-#define USART3_REG_RST()            do{ RCC->APB1RSTR |= (1 << 18); RCC->APB2RSTR &= ~(1 << 18); }while(0)
-#define UART4_REG_RST()             do{ RCC->APB1RSTR |= (1 << 19); RCC->APB2RSTR &= ~(1 << 19); }while(0)
-#define UART5_REG_RST()             do{ RCC->APB1RSTR |= (1 << 20); RCC->APB2RSTR &= ~(1 << 20); }while(0)
+#define USART1_REG_RST()            do{ RCC->APB2RSTR |= (1 << 14); RCC->APB2RSTR &= ~(1 << 14); } while(0)
+#define USART2_REG_RST()            do{ RCC->APB1RSTR |= (1 << 17); RCC->APB2RSTR &= ~(1 << 17); } while(0)
+#define USART3_REG_RST()            do{ RCC->APB1RSTR |= (1 << 18); RCC->APB2RSTR &= ~(1 << 18); } while(0)
+#define UART4_REG_RST()             do{ RCC->APB1RSTR |= (1 << 19); RCC->APB2RSTR &= ~(1 << 19); } while(0)
+#define UART5_REG_RST()             do{ RCC->APB1RSTR |= (1 << 20); RCC->APB2RSTR &= ~(1 << 20); } while(0)
 
 /**
  * I2C pin register reset macros
@@ -464,7 +464,7 @@ typedef struct {
 /** 
  * Some macros for SYSCFG peripheral
  */
-#define SYSCFG_CFGR4_SET()          SYSCFG->CFGR4 = (uint32_t*)(HAL_SYSCFG_BASEADDR + 0x48U)
+#define SYSCFG_CFGR4_SET()          (SYSCFG->CFGR4 = (uint32_t*)(HAL_SYSCFG_BASEADDR + 0x48U))
 
 /** 
  * Some generic macros

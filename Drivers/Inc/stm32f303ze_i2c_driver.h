@@ -114,13 +114,13 @@ typedef struct {
 /**
  * Peripheral Clock setup
  */
-void I2C_PeriClockControl(I2C_RegDef_t* pI2Cx, uint8_t EnorDi);
+void I2C_PeriClockControl(I2C_RegDef_t *pI2Cx, uint8_t EnorDi);
 
 /**
  * Init and De-init
  */
-void I2C_Init(I2C_Handle_t* pI2CHandle);
-void I2C_DeInit(I2C_RegDef_t* pI2Cx);
+void I2C_Init(I2C_Handle_t *pI2CHandle);
+void I2C_DeInit(I2C_RegDef_t *pI2Cx);
 
 /**
  * Data Send and Receive
@@ -135,8 +135,8 @@ void I2C_IRQPriorityCFG(uint8_t IRQnumber, uint32_t IRQPriority);
 /**
  * Other Peripheral Control APIs
  */
-void I2C_PeripheralControl(I2C_RegDef_t* pI2Cx, uint8_t EnorDi);
-uint8_t I2C_GetFlagStatus(I2C_RegDef_t* pI2Cx, uint32_t FlagName);
+void I2C_PeripheralControl(I2C_RegDef_t *pI2Cx, uint8_t EnorDi);
+uint8_t I2C_GetFlagStatus(I2C_RegDef_t *pI2Cx, uint32_t FlagName);
 
 /**
  * Application callback

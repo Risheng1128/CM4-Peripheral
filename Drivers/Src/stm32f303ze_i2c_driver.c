@@ -17,22 +17,22 @@
  * @note            - none
  * 
  *********************************************************/
-void I2C_PeriClockControl(I2C_RegDef_t* pI2Cx, uint8_t EnorDi)
+void I2C_PeriClockControl(I2C_RegDef_t *pI2Cx, uint8_t EnorDi)
 {
-    if(EnorDi == ENABLE) {
-        if(pI2Cx == I2C1)
+    if (EnorDi == ENABLE) {
+        if (pI2Cx == I2C1)
             I2C1_PCLK_EN();
-        else if(pI2Cx == I2C2)
+        else if (pI2Cx == I2C2)
             I2C2_PCLK_EN();
-        else if(pI2Cx == I2C3)
+        else if (pI2Cx == I2C3)
             I2C3_PCLK_EN();
     }
-    else if(EnorDi == DISABLE) {
-        if(pI2Cx == I2C1)
+    else if (EnorDi == DISABLE) {
+        if (pI2Cx == I2C1)
             I2C1_PCLK_DI();
-        else if(pI2Cx == I2C2)
+        else if (pI2Cx == I2C2)
             I2C2_PCLK_DI();
-        else if(pI2Cx == I2C3)
+        else if (pI2Cx == I2C3)
             I2C3_PCLK_DI();
     }
 }
@@ -45,7 +45,7 @@ void I2C_PeriClockControl(I2C_RegDef_t* pI2Cx, uint8_t EnorDi)
  * @note            - none
  * 
  *********************************************************/
-void I2C_Init(I2C_Handle_t* pI2CHandle)
+void I2C_Init(I2C_Handle_t *pI2CHandle)
 {
     
 }
@@ -58,12 +58,12 @@ void I2C_Init(I2C_Handle_t* pI2CHandle)
  * @note            - none
  * 
  *********************************************************/
-void I2C_DeInit(I2C_RegDef_t* pI2Cx)
+void I2C_DeInit(I2C_RegDef_t *pI2Cx)
 {
-    if(pI2Cx == I2C1)
+    if (pI2Cx == I2C1)
         I2C1_REG_RST();
-    else if(pI2Cx == I2C2)
+    else if (pI2Cx == I2C2)
         I2C2_REG_RST();
-    else if(pI2Cx == I2C3)
+    else if (pI2Cx == I2C3)
         I2C3_REG_RST();
 }
