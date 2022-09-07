@@ -20,7 +20,7 @@ C_INCLUDES =  \
 -IInc		  \
 -IDrivers/Inc \
 
-CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) -O0 -Wall
+CFLAGS = $(MCU) $(C_INCLUDES) -O0 -Wall
 LDSCRIPT = STM32F303ZETX_FLASH.ld
 LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) -lc -lm -lnosys
 
@@ -31,7 +31,7 @@ vpath %.s $(dir $(ASM_SOURCES))
 
 all: clean $(BUILD_DIR)/$(notdir $(TARGET)).elf
 $(BUILD_DIR)/%.o: %.c
-	$(CC) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@
 $(BUILD_DIR)/%.o: %.s
 	$(CC) -c $(CFLAGS) $< -o $@
 $(BUILD_DIR)/$(notdir $(TARGET)).elf: $(BUILD_DIR) $(OBJECTS)
