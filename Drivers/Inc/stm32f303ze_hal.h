@@ -18,33 +18,18 @@
 #ifndef _STM32F303ZE_HAL_H_
 #define _STM32F303ZE_HAL_H_
 #include <stdint.h>
+#include <stdbool.h>
 
 /* Because some values of register may changed easily, we need to add volatile to variable */
 #define __vo                        volatile
 
 /**
- * ARM Cortex M processor NVIC ISER Register
+ * ARM Cortex M processor NVIC Register
  * We can find it in Nested Vectored Interrupt Controller in Generic User Guide
  */
-#define NVIC_ISER0                  ((__vo uint32_t *)0xE000E100U)  
-#define NVIC_ISER1                  ((__vo uint32_t *)0xE000E104U) 
-#define NVIC_ISER2                  ((__vo uint32_t *)0xE000E108U) 
-#define NVIC_ISER3                  ((__vo uint32_t *)0xE000E10CU)
-
-/**
- * ARM Cortex M processor NVIC ICER Register
- * We can find it in Nested Vectored Interrupt Controller in Generic User Guide
- */
-#define NVIC_ICER0                  ((__vo uint32_t *)0xE000E180U)  
-#define NVIC_ICER1                  ((__vo uint32_t *)0xE000E184U) 
-#define NVIC_ICER2                  ((__vo uint32_t *)0xE000E188U)
-#define NVIC_ICER3                  ((__vo uint32_t *)0xE000E18CU)
-
-/**
- * ARM Cortex M processor NVIC Priority Register base address macro
- * We can find it in Nested Vectored Interrupt Controller in Generic User Guide
- */
-#define NVIC_PR_BASE_ADDR           ((__vo uint32_t *)0xE000E400U)
+#define NVIC_ISER_BASEADDR         ((__vo uint32_t *)0xE000E100U)
+#define NVIC_ICER_BASEADDR         ((__vo uint32_t *)0xE000E180U)
+#define NVIC_PR_BASEADDR           ((__vo uint32_t *)0xE000E400U)
 
 /* In priority register, 16 programmable priority levels (4 bits of interrupt priority are used) */
 /* From RM0316 Reference manual p285 */
@@ -500,11 +485,15 @@ typedef struct {
 #define NVIC_IRQ_PRI14              14
 #define NVIC_IRQ_PRI15              15
 
-
 /** 
  * Some macros for SYSCFG peripheral
  */
 #define SYSCFG_CFGR4_SET()          (SYSCFG->CFGR4 = (uint32_t*)(HAL_SYSCFG_BASEADDR + 0x48U))
+
+/**
+ * IRQ number macro
+ */
+#define IRQ_MAX_NUMBER              84 /* max IRQ number in STM32F303ZE */
 
 /** 
  * Some generic macros
@@ -515,5 +504,8 @@ typedef struct {
 #define RESET               DISABLE
 #define GPIO_PIN_SET        SET
 #define GPIO_PIN_RESET      RESET
+
+bool NVIC_Interrupt_Eable(uint8_t irq_number);
+bool NVIC_Interrupt_Disable(uint8_t irq_number);
 
 #endif /* end of _STM32F303ZE_HAL_H_ */

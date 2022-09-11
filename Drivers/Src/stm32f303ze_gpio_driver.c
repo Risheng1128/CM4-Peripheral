@@ -231,19 +231,9 @@ void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber)
 void GPIO_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi)
 {
     if (EnorDi == ENABLE) {
-        if (IRQNumber < 32)
-            *NVIC_ISER0 |= 1 << IRQNumber;
-        else if (IRQNumber >= 32 && IRQNumber < 64)
-            *NVIC_ISER1 |= 1 << (IRQNumber % 32);
-        else if (IRQNumber >= 64 && IRQNumber < 96)
-            *NVIC_ISER2 |= 1 << (IRQNumber * 64);
+        NVIC_Interrupt_Eable(IRQNumber);
     } else {
-        if (IRQNumber < 32)
-            *NVIC_ICER0 |= 1 << IRQNumber;
-        else if (IRQNumber >= 32 && IRQNumber < 64)
-            *NVIC_ICER1 |= 1 << (IRQNumber % 32);
-        else if (IRQNumber >= 64 && IRQNumber < 96)
-            *NVIC_ICER2 |= 1 << (IRQNumber * 64);
+        NVIC_Interrupt_Disable(IRQNumber);
     }
 }
 
@@ -262,8 +252,8 @@ void GPIO_IRQPriorityConfig(uint8_t IRQNumber, uint32_t IRQpriority)
     prx = IRQNumber / 4;
     shift = IRQNumber % 4;
     shift = (8 * shift) + (8 - NO_PR_BITS_IMPLEMENTED);
-    *(NVIC_PR_BASE_ADDR + prx) &= ~(IRQpriority << shift); /* clear */ 
-    *(NVIC_PR_BASE_ADDR + prx) |=   IRQpriority << shift; 
+    *(NVIC_PR_BASEADDR + prx) &= ~(IRQpriority << shift); /* clear */ 
+    *(NVIC_PR_BASEADDR + prx) |=   IRQpriority << shift; 
 }
 
 /********************************************************
