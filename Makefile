@@ -20,7 +20,7 @@ C_INCLUDES =  \
 -IInc		  \
 -IDrivers/Inc \
 
-CFLAGS = $(MCU) $(C_INCLUDES) -O0 -Wall
+CFLAGS = $(MCU) $(C_INCLUDES) -O0 -Wall -g
 LDSCRIPT = STM32F303ZETX_FLASH.ld
 LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) -lc -lm -lnosys
 
@@ -42,7 +42,7 @@ $(BUILD_DIR):
 
 .PHONY: disassembly load upload clean
 disassembly: $(BUILD_DIR)/$(notdir $(TARGET)).elf
-	$(COMPILER)objdump.exe -d $^ > $(BUILD_DIR)/$(notdir $(TARGET)).S
+	$(COMPILER)objdump -d $^ > $(BUILD_DIR)/$(notdir $(TARGET)).S
 load: 
 	openocd -f board/st_nucleo_f3.cfg
 upload:
