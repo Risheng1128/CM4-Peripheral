@@ -270,6 +270,30 @@ typedef struct {
 } SYSCFG_RegDef_t;
 
 /**
+ * Define basic struct of DMA in the microcontroller
+ * We can find it in DMA registers in RM0316
+ */
+typedef struct {
+    __vo uint32_t CCR;      /* DMA channel x configuration register      Address offset: 0x08 + 0d20 × (channel number - 1) */
+    __vo uint32_t CNDTR;    /* DMA channel x number of data register     Address offset: 0x0C + 0d20 × (channel number - 1) */
+    __vo uint32_t CPAR;     /* DMA channel x peripheral address register Address offset: 0x10 + 0d20 × (channel number - 1) */
+    __vo uint32_t CMAR;     /* DMA channel x memory address register     Address offset: 0x14 + 0d20 × (channel number - 1) */
+    uint32_t reserve;       /* reserve                                   Address offset: 0x18 + 0d20 × (channel number - 1) */
+} DMA_ChnlRegDef_t;
+
+typedef struct {
+    __vo uint32_t ISR;      /* DMA interrupt status register             Address offset : 0x00 */
+    __vo uint32_t IFCR;     /* DMA interrupt flag clear register         Address offset : 0x04 */
+    DMA_ChnlRegDef_t CHNL_CTRL[7];
+} DMA1_RegDef_t;
+
+typedef struct {
+    __vo uint32_t ISR;      /* DMA interrupt status register             Address offset : 0x00 */
+    __vo uint32_t IFCR;     /* DMA interrupt flag clear register         Address offset : 0x04 */
+    DMA_ChnlRegDef_t CHNL_CTRL[5];
+} DMA2_RegDef_t;
+
+/**
  * Peripheral definitions (Peripheral base addresses typecasted to xxx_RegDef_t)
  */
 #define EXTI                        ((EXTI_RegDef_t *)HAL_EXTI_BASEADDR)
@@ -291,6 +315,8 @@ typedef struct {
 #define I2C1                        ((I2C_RegDef_t *)HAL_I2C1_BASEADDR)
 #define I2C2                        ((I2C_RegDef_t *)HAL_I2C2_BASEADDR)
 #define I2C3                        ((I2C_RegDef_t *)HAL_I2C3_BASEADDR)
+#define DMA1                        ((DMA1_RegDef_t *)HAL_DMA1_BASEADDR)
+#define DMA2                        ((DMA2_RegDef_t *)HAL_DMA2_BASEADDR)
 
 /** 
  * Clock Enable macro for GPIOx peripheral
@@ -341,6 +367,13 @@ typedef struct {
 #define SYSCFG_PCLK_EN()            (RCC->APB2ENR |= (1 << 0))
 
 /** 
+ * Clock Enable macro for DMA peripheral
+ * We can find it in AHB peripheral clock enable register in RM0316
+ */
+#define DMA1_PCLK_EN()              (RCC->AHBENR |= (1 << 0))
+#define DMA2_PCLK_EN()              (RCC->AHBENR |= (1 << 1))
+
+/** 
  * Clock Disable macro for GPIOx peripheral
  * We can find it in AHB peripheral clock disable register in RM0316
  */
@@ -386,7 +419,14 @@ typedef struct {
  * Clock Disable macro for SYSCFG peripheral
  * We can find it in APB2 peripheral clock disable register in RM0316
  */
-#define SYSCFG_PCLK_DI()            RCC->APB2ENR &= ~(1 << 0)
+#define SYSCFG_PCLK_DI()            (RCC->APB2ENR &= ~(1 << 0))
+
+/** 
+ * Clock Disable macro for DMA peripheral
+ * We can find it in AHB peripheral clock disable register in RM0316
+ */
+#define DMA1_PCLK_DI()              (RCC->AHBENR &= ~(1 << 0))
+#define DMA2_PCLK_DI()              (RCC->AHBENR &= ~(1 << 1))
 
 /**
  * GPIO pin register reset macros
@@ -412,9 +452,9 @@ typedef struct {
 /**
  * I2C pin register reset macros
  */
-#define I2C1_REG_RST()              do{ RCC->APB1RSTR |= (1 << 21); RCC->APB2RSTR &= ~(1 << 21); }while(0)
-#define I2C2_REG_RST()              do{ RCC->APB1RSTR |= (1 << 22); RCC->APB2RSTR &= ~(1 << 22); }while(0)
-#define I2C3_REG_RST()              do{ RCC->APB1RSTR |= (1 << 30); RCC->APB2RSTR &= ~(1 << 30); }while(0)
+#define I2C1_REG_RST()              do{ RCC->APB1RSTR |= (1 << 21); RCC->APB2RSTR &= ~(1 << 21); } while(0)
+#define I2C2_REG_RST()              do{ RCC->APB1RSTR |= (1 << 22); RCC->APB2RSTR &= ~(1 << 22); } while(0)
+#define I2C3_REG_RST()              do{ RCC->APB1RSTR |= (1 << 30); RCC->APB2RSTR &= ~(1 << 30); } while(0)
 
 /**
  * GPIO pin SYSCFG external interrupt configuration macros
