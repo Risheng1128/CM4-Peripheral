@@ -56,7 +56,18 @@ void DMA1_init(void)
     DMA1_Data_Size_Set(&DMA_Handler);
     DMA1_Peripheral_Addr_Set(&DMA_Handler);
     DMA1_Memory_Addr_Set(&DMA_Handler);
-    DMA1_CHANNEL_EN(DMA_Handler.DMA_CFG.DMA_ChannelNumber);
+    DMA1_Channel_Enable(&DMA_Handler);
+    NVIC_Interrupt_Eable(IRQ_NO_DMA1_Channel2);
+    DMA1_Interrupt_Enable(&DMA_Handler, TC_FLAG);
+}
+
+void DMA_TC_Callback(void)
+{
+    USART3_CR3 &= ~(1 << 7);
+    DMA1_Channel_Disable(&DMA_Handler);
+    DMA1_Interrupt_Clear(&DMA_Handler, CTCIF | CGIF);
+    DMA1_Data_Size_Set(&DMA_Handler);
+    DMA1_Channel_Enable(&DMA_Handler);
 }
 
 int main(void)
@@ -64,9 +75,8 @@ int main(void)
     MYUSART_Init();
     user_botton_set();
     user_botton_interrupt_set();
-    while (1) {
-        DMA1_init();
-    }
+    DMA1_init();
+    while (1);
     return 0;
 }
 
@@ -75,15 +85,14 @@ void EXTI15_10_IRQHandler(void)
     for (int i = 0; i < 60000; i++);
     // send USART3 TX request to DMA1
     USART3_CR3 |= (1 << 7);
-
-    // wait for transfer complete
-    while ((DMA_Handler.pDMAx->ISR >> 5) & 0x1) {
-        USART3_CR3 &= ~(1 << 7);
-        DMA_Handler.pDMAx->IFCR |= (1 << 4);
-        DMA_Handler.pDMAx->IFCR &= ~(1 << 4);
-    }
-
-    DMA1_CHANNEL_DI(DMA_Handler.DMA_CFG.DMA_ChannelNumber);
     for (int i = 0; i < 60000; i++);
     GPIO_IRQHandling(GPIO_PIN_NO_13);
+}
+
+void DMA1_CH2_IRQHandler(void)
+{
+    // transfer complete
+    if ((DMA_Handler.pDMAx->ISR >> 5) & 0x1) {
+        DMA_TC_Callback();
+    }
 }

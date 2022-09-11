@@ -462,6 +462,13 @@ typedef struct {
 #define IRQ_NO_EXTI2_TS             8
 #define IRQ_NO_EXTI3                9
 #define IRQ_NO_EXTI4                10
+#define IRQ_NO_DMA1_Channel1        11
+#define IRQ_NO_DMA1_Channel2        12
+#define IRQ_NO_DMA1_Channel3        13
+#define IRQ_NO_DMA1_Channel4        14
+#define IRQ_NO_DMA1_Channel5        15
+#define IRQ_NO_DMA1_Channel6        16
+#define IRQ_NO_DMA1_Channel7        17
 #define IRQ_NO_EXTI9_5              23
 #define IRQ_NO_EXTI15_10            40
 

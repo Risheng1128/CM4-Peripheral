@@ -90,12 +90,41 @@ typedef struct {
 #define DMA_P2M                 2   /* Peripheral to Memory mode */
 #define DMA_P2P                 3   /* Peripheral to Peripheral mode */
 
-#define DMA1_CHANNEL_EN(chnl_num)    (DMA1->CHNL_CTRL[chnl_num].CCR |= (1 << 0))
-#define DMA1_CHANNEL_DI(chnl_num)    (DMA1->CHNL_CTRL[chnl_num].CCR &= ~(1 << 0))
+/**
+ * DMA interrupt enable flag
+ * TC: transfer complete
+ * HT: half transfer
+ * TE: transfer error
+ */
+#define TC_FLAG               (1 << 1)
+#define HT_FLAG               (1 << 2)
+#define TE_FLAG               (1 << 3)
+
+/**
+ * DMA interrupt clear flag
+ * CGIF: clear global interrupt flag
+ * CTCIF: clear transfer complete interrupt flag
+ * CHTIF: clear half transfer interrupt flag
+ * CTEIF: clear transfer error interrupt flag
+ */
+#define CGIF                  (1 << 0)
+#define CTCIF                 (1 << 1)
+#define CHTIF                 (1 << 2)
+#define CTEIF                 (1 << 3)
+
+/**
+ * DMA max channel number
+ */
+#define DMA1_MAX_CHANNEL_NUMBER 7
+#define DMA2_MAX_CHANNEL_NUMBER 5
 
 void DMA1_Init(DMA1_Handle_t *pDMA1Handle);
 void DMA1_Peripheral_Addr_Set(DMA1_Handle_t *pDMA1Handle);
 void DMA1_Memory_Addr_Set(DMA1_Handle_t *pDMA1Handle);
 void DMA1_Data_Size_Set(DMA1_Handle_t *pDMA1Handle);
-
+bool DMA1_Interrupt_Enable(DMA1_Handle_t *pDMA1Handle, uint8_t flags);
+bool DMA1_Interrupt_Disable(DMA1_Handle_t *pDMA1Handle, uint8_t flags);
+bool DMA1_Channel_Enable(DMA1_Handle_t *pDMA1Handle);
+bool DMA1_Channel_Disable(DMA1_Handle_t *pDMA1Handle);
+bool DMA1_Interrupt_Clear(DMA1_Handle_t *pDMA1Handle, uint8_t flags);
 #endif /* end of _STM32F303ZE_DMA_DRIVER_H_ */
