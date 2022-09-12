@@ -108,8 +108,8 @@ void USART_Deinit(USART_RegDef_t *pUSARTx)
 /********************************************************
  * @fn              - USART_PeriClockControl
  * @brief           - This function enables or disables the clock of the USART
- * @param[in]       - base address of the GPIO peripheral
- *                  - ENABLE or DISABLE macros
+ * @param[in]       - pUSARTx: base address of the GPIO peripheral
+ *                  - EnorDi: ENABLE or DISABLE macros
  * @return          - none
  * @note            - none
  * 
@@ -164,12 +164,12 @@ void USART_SetBaudRate(USART_Handle_t *pUSARTHandle)
 
 /********************************************************
  * @fn              - USART_SendData
- * @brief           - USART送資料 
- * @param[in]       - Handle structure for a USART pin
- *                  - Data Buffer
- *                  - Data Length
+ * @brief           - USART send data
+ * @param[in]       - pUSARTHandle: Handle structure for a USART pin
+ *                  - pTxBuffer: Data Buffer
+ *                  - Len: Data Length
  * @return          - none
- * @note            - data width 9目前有問題
+ * @note            - data width 9 not done
  * 
  *********************************************************/
 void USART_SendData(USART_Handle_t *pUSARTHandle, uint8_t *pTxBuffer, uint32_t Len)
@@ -201,9 +201,9 @@ void USART_SendData(USART_Handle_t *pUSARTHandle, uint8_t *pTxBuffer, uint32_t L
 
 /********************************************************
  * @fn              - USART_ReceiveData
- * @brief           - USART接收資料
+ * @brief           - USART receive data
  * @param[in]       - Handle structure for a USART pin
- * @return          - 接收到的資料(uint8_t)
+ * @return          - received data (uint8_t)
  * @note            - none
  * 
  *********************************************************/
@@ -252,19 +252,65 @@ void USART_SendDataIT(USART_Handle_t *pUSARTx, uint8_t *pTxBuffer, uint32_t Len)
  *********************************************************/
 uint8_t USART_ReceiveDataIT(USART_Handle_t *pUSARTHandle, uint8_t *pRxBuffer, uint32_t Len)
 {
+    for (int i = 0; i < Len; i++) {
+        pRxBuffer[i] = USART_ReceiveData(pUSARTHandle);
+    }
+    USART_CR1_Interrupt_Set(pUSARTHandle, TCIE_FLAG, ENABLE);
     return 0;
 }
 
 /********************************************************
- * @fn              - USART_IRQInterruptConfig
- * @brief           - 
- * @param[in]       - 
+ * @fn              - USART_CR1_Interrupt_Set
+ * @brief           - USART interrupt setting in USART_CR1
+ * @param[in]       - pUSARTx: Handle structure for a USART pin
+ *                  - flags: interrupt flags in USART_CR1
+ *                  - EnorDi: ENABLE or DISABLE macros
  * @return          - none
  * @note            - none
  *********************************************************/
-void USART_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi)
+void USART_CR1_Interrupt_Set(USART_Handle_t *pUSARTx, uint32_t flags, uint8_t EnorDi)
 {
+    if (EnorDi == ENABLE) {
+        pUSARTx->pUSARTx->CR1 |= flags;
+    } else if (EnorDi == DISABLE) {
+        pUSARTx->pUSARTx->CR1 &= ~flags;
+    }
+}
 
+/********************************************************
+ * @fn              - USART_CR2_Interrupt_Set
+ * @brief           - USART interrupt setting in USART_CR2
+ * @param[in]       - pUSARTx: Handle structure for a USART pin
+ *                  - flags: interrupt flags in USART_CR2
+ *                  - EnorDi: ENABLE or DISABLE macros
+ * @return          - none
+ * @note            - none
+ *********************************************************/
+void USART_CR2_Interrupt_Set(USART_Handle_t *pUSARTx, uint32_t flags, uint8_t EnorDi)
+{
+    if (EnorDi == ENABLE) {
+        pUSARTx->pUSARTx->CR2 |= flags;
+    } else if (EnorDi == DISABLE) {
+        pUSARTx->pUSARTx->CR2 &= ~flags;
+    }
+}
+
+/********************************************************
+ * @fn              - USART_CR3_Interrupt_Set
+ * @brief           - USART interrupt setting in USART_CR3
+ * @param[in]       - pUSARTx: Handle structure for a USART pin
+ *                  - flags: interrupt flags in USART_CR3
+ *                  - EnorDi: ENABLE or DISABLE macros
+ * @return          - none
+ * @note            - none
+ *********************************************************/
+void USART_CR3_Interrupt_Set(USART_Handle_t *pUSARTx, uint32_t flags, uint8_t EnorDi)
+{
+    if (EnorDi == ENABLE) {
+        pUSARTx->pUSARTx->CR3 |= flags;
+    } else if (EnorDi == DISABLE) {
+        pUSARTx->pUSARTx->CR3 &= ~flags;
+    }
 }
 
 /********************************************************
@@ -275,18 +321,6 @@ void USART_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi)
  * @note            - none
  *********************************************************/
 void USART_IRQPriorityConfig(uint8_t IRQNumber, uint32_t IRQPriority)
-{
-
-}
-
-/********************************************************
- * @fn              - USART_IRQHandling
- * @brief           -
- * @param[in]       - 
- * @return          - none
- * @note            - none
- *********************************************************/
-void USART_IRQHandling(USART_Handle_t *pHandle)
 {
 
 }

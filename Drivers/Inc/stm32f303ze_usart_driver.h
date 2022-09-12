@@ -94,30 +94,29 @@ typedef struct {
 #define USART_HW_FLOWCTRL_CTS    	    2       /* Only use RTS */
 #define USART_HW_FLOWCTRL_CRTS  	    3       /* Use both CTS and RTS */
 
-/**************************** Some Registers Macros *****************************/
 /**
- * The setting macros of Control register 1 (USART_CR1)
+ * CR1 Interrupt setting macros
  */
+#define IDLEIE_FLAG       (1 << 4)      /* Idle line detected */
+#define RXNEIE_FLAG       (1 << 5)      /* Receive data register not empty (data ready to be read) and Overrun error detected */
+#define TCIE_FLAG         (1 << 6)      /* Transmission Complete */
+#define TXEIE_FLAG        (1 << 7)      /* Transmit data register empty */
+#define PEIE_FLAG         (1 << 8)      /* Parity error */
+#define CMIE_FLAG         (1 << 14)     /* Character match */
+#define RTOIE_FLAG        (1 << 26)     /* Receiver timeout */
+#define EOBIE_FLAG        (1 << 27)     /* End of Block */ 
 
-// /* Bit 27 EOBIE (End of Block interrupt enable) */
-// #define USART_EOBIE_DI()                pUSARTx->CR1 &= ~(1 << 27)    /* Interrupt is inhibited */
-// #define USART_EOBIE_EN()                pUSARTx->CR1 |=  (1 << 27)    /* An USART interrupt is generated when the EOBF flag is set in the USART_ISR register */
-// /* Bit 26 RTOIE (Receiver timeout interrupt enable) */
-// #define USART_RTOIE_DI()                pUSARTx->CR1 &= ~(1 << 26)    /* Interrupt is inhibited */
-// #define USART_RTOIE_EN()                pUSARTx->CR1 |=  (1 << 26)    /* An USART interrupt is generated when the RTOF bit is set in the USART_ISR register */
-// /* Bit 15 OVER8 (Oversampling mode) */
-// #define USART_OVER16_SET()              pUSARTx->CR1 &= ~(1 << 15)    /* Oversampling by 16 */
-// #define USART_OVER8_SET()               pUSARTx->CR1 |=  (1 << 15)    /* Oversampling by 8 */
-// /* Bit 14 CMIE (Character match interrupt enable) */
-// #define USART_CMIE_DI()                 pUSARTx->CR1 &= ~(1 << 14)    /* Interrupt is inhibited */
-// #define USART_CMIE_EN()                 pUSARTx->CR1 |=  (1 << 14)    /* An USART interrupt is generated when the CMF bit is set in the USART_ISR register */
-// /* Bit 13 MME (Mute mode enable) */
-// #define USART_MME_DI()                  pUSARTx->CR1 &= ~(1 << 13)    /* Receiver in active mode permanently */
-// #define USART_MME_EN()                  pUSARTx->CR1 |=  (1 << 13)    /* Receiver can switch between mute mode and active mode */
-// /* Bit 11 WAKE (Receiver wakeup method) */
-// #define USART_WAKE_IL                   0                             /* Idle line */
-// #define USART_WAKE_AM                   1                             /* Address Mark */
+/**
+ * CR2 Interrupt setting macros
+ */
+#define LBDIE_FLAG        (1 << 6)      /* LIN break */
 
+/**
+ * CR3 Interrupt setting macros
+ */
+#define EIE_FLAG          (1 << 0)      /* Noise Flag, Overrun error and Framing Error in multibuffer communication */
+#define CTSIE_FLAG        (1 << 10)     /* CTS interrupt */
+#define WUFIE_FLAG        (1 << 22)     /* Wakeup from Stop mode */
 
 /*************************************************************************
  *                    APIs supported by this driver
@@ -150,9 +149,10 @@ uint8_t USART_ReceiveDataIT(USART_Handle_t *pUSARTHandle, uint8_t *pRxBuffer, ui
 /**
  * IRQ Configuration and ISR handling
  */
-void USART_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi);
+void USART_CR1_Interrupt_Set(USART_Handle_t *pUSARTx, uint32_t flags, uint8_t EnorDi);
+void USART_CR2_Interrupt_Set(USART_Handle_t *pUSARTx, uint32_t flags, uint8_t EnorDi);
+void USART_CR3_Interrupt_Set(USART_Handle_t *pUSARTx, uint32_t flags, uint8_t EnorDi);
 void USART_IRQPriorityConfig(uint8_t IRQNumber, uint32_t IRQPriority);
-void USART_IRQHandling(USART_Handle_t *pHandle);
 
 /*
  * Other Peripheral Control APIs

@@ -457,20 +457,25 @@ typedef struct {
  * IRQ number macros in STM32F303ze microcontroller
  * We can find it in vector table in RM0316
  */
-#define IRQ_NO_EXTI0                6
-#define IRQ_NO_EXTI1                7
-#define IRQ_NO_EXTI2_TS             8
-#define IRQ_NO_EXTI3                9
-#define IRQ_NO_EXTI4                10
-#define IRQ_NO_DMA1_Channel1        11
-#define IRQ_NO_DMA1_Channel2        12
-#define IRQ_NO_DMA1_Channel3        13
-#define IRQ_NO_DMA1_Channel4        14
-#define IRQ_NO_DMA1_Channel5        15
-#define IRQ_NO_DMA1_Channel6        16
-#define IRQ_NO_DMA1_Channel7        17
-#define IRQ_NO_EXTI9_5              23
-#define IRQ_NO_EXTI15_10            40
+#define IRQ_NO_EXTI0                6   /* EXTI Line0 interrupt */
+#define IRQ_NO_EXTI1                7   /* EXTI Line1 interrupt */
+#define IRQ_NO_EXTI2_TS             8   /* EXTI Line2 and Touch sensing interrupts */
+#define IRQ_NO_EXTI3                9   /* EXTI Line3 */
+#define IRQ_NO_EXTI4                10  /* EXTI Line4 */
+#define IRQ_NO_DMA1_Channel1        11  /* DMA1 channel 1 interrupt */
+#define IRQ_NO_DMA1_Channel2        12  /* DMA1 channel 2 interrupt */
+#define IRQ_NO_DMA1_Channel3        13  /* DMA1 channel 3 interrupt */
+#define IRQ_NO_DMA1_Channel4        14  /* DMA1 channel 4 interrupt */
+#define IRQ_NO_DMA1_Channel5        15  /* DMA1 channel 5 interrupt */
+#define IRQ_NO_DMA1_Channel6        16  /* DMA1 channel 6 interrupt */
+#define IRQ_NO_DMA1_Channel7        17  /* DMA1 channel 7 interrupt */
+#define IRQ_NO_EXTI9_5              23  /* EXTI Line[9:5] interrupts */
+#define IRQ_NO_USART1               37  /* USART1 global interrupt & EXTI Line 25 */
+#define IRQ_NO_USART2               38  /* USART2 global interrupt & EXTI Line 26 */
+#define IRQ_NO_USART3               39  /* USART3 global interrupt & EXTI Line 28 */
+#define IRQ_NO_EXTI15_10            40  /* EXTI Line[15:10] interrupts */
+#define IRQ_NO_UART4                52  /* UART4 global and EXTI Line 34 interrupts */
+#define IRQ_NO_UART5                53  /* UART5 global and EXTI Line 35 interrupts */
 
 /**
  * IRQ priority macros
