@@ -111,7 +111,7 @@ void DMA1_Data_Size_Set(DMA1_Handle_t *pDMA1Handle)
  *                    - TE_FLAG: transfer error
  * @return          - true: interrupt setting success
  *                  - false: channel number error
- * @note            - only DMA1 has interrupt (DMA2 no interrupt)
+ * @note            - none
  *********************************************************/
 bool DMA1_Interrupt_Enable(DMA1_Handle_t *pDMA1Handle, uint8_t flags)
 {
@@ -134,7 +134,7 @@ bool DMA1_Interrupt_Enable(DMA1_Handle_t *pDMA1Handle, uint8_t flags)
  *                    - TE_FLAG: transfer error
  * @return          - true: interrupt setting success
  *                  - false: channel number error
- * @note            - only DMA1 has interrupt (DMA2 no interrupt)
+ * @note            - none
  *********************************************************/
 bool DMA1_Interrupt_Disable(DMA1_Handle_t *pDMA1Handle, uint8_t flags)
 {
